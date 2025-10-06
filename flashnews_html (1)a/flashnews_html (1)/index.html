@@ -1,0 +1,110 @@
+<!-- index.html (na raiz do projeto) -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias Diárias - Seu Portal de Informação</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-newspaper"></i>
+                <span>Notícias Diárias</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="pages/news/politics.html">Política</a></li>
+                    <li><a href="pages/news/economy.html">Economia</a></li>
+                    <li><a href="pages/news/sports.html">Esportes</a></li>
+                    <li><a href="pages/news/technology.html">Tecnologia</a></li>
+                    <li><a href="pages/archive/index.html">Arquivo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <main class="main-content">
+            <div class="breaking-news">
+                <div class="breaking-news-content">
+                    <i class="fas fa-bolt"></i>
+                    <span>ÚLTIMA HORA: Governo anuncia novas medidas econômicas para combater inflação</span>
+                </div>
+            </div>
+
+            <section id="daily-news">
+                <h2 class="section-title">Notícias de Hoje</h2>
+                <div class="news-grid">
+                    <!-- Notícias serão carregadas dinamicamente ou incluídas via JavaScript -->
+                    <div id="news-container"></div>
+                </div>
+            </section>
+
+            <section id="featured-news">
+                <h2 class="section-title">Em Destaque</h2>
+                <div id="featured-container"></div>
+            </section>
+        </main>
+
+        <aside class="sidebar">
+            <div class="ad-container">
+                <h3 class="ad-title">Google Ads</h3>
+                <div class="ad-placeholder">
+                    ESPAÇO PARA ANÚNCIO DO GOOGLE ADS<br>
+                    300x250px
+                </div>
+            </div>
+
+            <div class="ad-container">
+                <h3 class="ad-title">Anúncios Privados</h3>
+                <div class="ad-placeholder">
+                    ESPAÇO PARA ANÚNCIOS PRIVADOS<br>
+                    300x250px
+                </div>
+            </div>
+
+            <div class="archive-section">
+                <h3 class="section-title">Arquivo de Notícias</h3>
+                <ul class="archive-list" id="archive-list"></ul>
+            </div>
+        </aside>
+    </div>
+
+ <!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="logo">
+            <i class="fas fa-newspaper"></i>
+            <span>Notícias Diárias</span>
+        </div>
+        <p>Seu portal de informação confiável desde 2024</p>
+
+        <!-- Redes sociais reais -->
+        <div class="social-links" id="social-links">
+            <a href="https://www.instagram.com/miguel_augustosilva/" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/@godgamestutorial" target="_blank">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://www.tiktok.com/@miiguelsilvah?lang=pt-BR" target="_blank">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        </div>
+
+        <p>&copy; 2025 Notícias Diárias. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+
+    <script src="js/main.js"></script>
+    <script src="js/news-loader.js"></script>
+</body>
+</html>

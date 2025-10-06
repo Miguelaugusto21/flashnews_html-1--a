@@ -1,0 +1,187 @@
+<!-- pages/archive/index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquivo de Notícias - Notícias Diárias</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-newspaper"></i>
+                <span>Notícias Diárias</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Início</a></li>
+                    <li><a href="../news/politics.html">Política</a></li>
+                    <li><a href="../news/economy.html">Economia</a></li>
+                    <li><a href="../news/sports.html">Esportes</a></li>
+                    <li><a href="../news/technology.html">Tecnologia</a></li>
+                    <li><a href="index.html">Arquivo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <main class="main-content">
+            <h2 class="section-title">Arquivo de Notícias</h2>
+            <div class="archive-container" id="archive-container"></div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="ad-container">
+                <h3 class="ad-title">Google Ads</h3>
+                <div class="ad-placeholder">
+                    ESPAÇO PARA ANÚNCIO DO GOOGLE ADS<br>
+                    300x250px
+                </div>
+            </div>
+
+            <div class="ad-container">
+                <h3 class="ad-title">Anúncios Privados</h3>
+                <div class="ad-placeholder">
+                    ESPAÇO PARA ANÚNCIOS PRIVADOS<br>
+                    300x250px
+                </div>
+            </div>
+
+            <div class="archive-section">
+                <h3 class="section-title">Notícias Recentes</h3>
+                <ul class="archive-list" id="recent-news-list"></ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fas fa-newspaper"></i>
+                <span>Notícias Diárias</span>
+            </div>
+            <p>Seu portal de informação confiável desde 2024</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p>&copy; 2024 Notícias Diárias. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script src="../../js/news-loader.js"></script>
+    <script>
+        // Script específico para a página de arquivo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar dados do arquivo
+            const archiveData = newsLoader.getArchive();
+            
+            // Renderizar o arquivo
+            renderArchivePage(archiveData);
+            
+            // Carregar notícias recentes para exibir no sidebar
+            const recentNews = newsLoader.getNews().slice(0, 3);
+            renderRecentNews(recentNews);
+        });
+        
+        // Função para renderizar a página de arquivo
+        function renderArchivePage(archiveData) {
+            const archiveContainer = document.getElementById('archive-container');
+            
+            if (!archiveContainer) return;
+            
+            // Criar título da seção
+            const archiveTitle = document.createElement('h3');
+            archiveTitle.textContent = 'Todas as Notícias Arquivadas';
+            archiveTitle.style.marginBottom = '1.5rem';
+            archiveContainer.appendChild(archiveTitle);
+            
+            // Criar lista de notícias arquivadas
+            const archiveList = document.createElement('ul');
+            archiveList.style.listStyle = 'none';
+            archiveList.style.padding = '0';
+            
+            archiveData.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.style.padding = '1rem 0';
+                listItem.style.borderBottom = '1px solid #eee';
+                listItem.style.transition = 'background-color 0.3s ease';
+                
+                listItem.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <span style="color: #6c757d; font-size: 0.9rem; margin-right: 0.5rem;">${item.date}</span>
+                            <a href="#" class="archive-link" data-id="${item.id}" style="color: #1a1a1a; text-decoration: none; font-weight: bold; transition: color 0.3s ease;">
+                                ${item.title}
+                            </a>
+                        </div>
+                        <a href="#" class="read-more" data-id="${item.id}" style="color: #3498db; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 5px;">
+                            Ler mais <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                `;
+                
+                // Adicionar eventos de hover
+                listItem.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = '#f8f9fa';
+                });
+                
+                listItem.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = 'transparent';
+                });
+                
+                // Adicionar evento de clique
+                listItem.querySelector('.archive-link').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Visualizando notícia do arquivo. Em um sistema real, esta página carregaria o conteúdo completo da notícia.');
+                });
+                
+                listItem.querySelector('.read-more').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Visualizando notícia completa. Em um sistema real, esta página mostraria o conteúdo completo da notícia.');
+                });
+                
+                archiveList.appendChild(listItem);
+            });
+            
+            archiveContainer.appendChild(archiveList);
+        }
+        
+        // Função para renderizar notícias recentes no sidebar
+        function renderRecentNews(recentNews) {
+            const recentNewsList = document.getElementById('recent-news-list');
+            
+            if (!recentNewsList) return;
+            
+            recentNews.forEach(news => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <a href="#" class="archive-link" data-id="${news.id}">
+                        <span class="archive-date">${news.date}</span>
+                        <span>${news.title}</span>
+                    </a>
+                `;
+                
+                // Adicionar evento de clique
+                listItem.querySelector('.archive-link').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Visualizando notícia recente. Em um sistema real, esta página carregaria o conteúdo completo da notícia.');
+                });
+                
+                recentNewsList.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>

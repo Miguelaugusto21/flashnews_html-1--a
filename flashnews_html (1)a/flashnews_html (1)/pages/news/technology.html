@@ -1,0 +1,164 @@
+<!-- pages/news/technology.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias de Tecnologia - Notícias Diárias</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-newspaper"></i>
+                <span>Notícias Diárias</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Início</a></li>
+                    <li><a href="politics.html">Política</a></li>
+                    <li><a href="economy.html">Economia</a></li>
+                    <li><a href="sports.html">Esportes</a></li>
+                    <li><a href="technology.html">Tecnologia</a></li>
+                    <li><a href="../archive/index.html">Arquivo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <main class="main-content">
+            <h2 class="section-title">Notícias de Tecnologia</h2>
+            <div class="news-grid" id="technology-news-container"></div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="ad-container">
+                <h3 class="ad-title">Google Ads</h3>
+                <div class="ad-placeholder">
+                    ESPAÇO PARA ANÚNCIO DO GOOGLE ADS<br>
+                    300x250px
+                </div>
+            </div>
+
+            <div class="ad-container">
+                <h3 class="ad-title">Anúncios Privados</h3>
+                <div class="ad-placeholder">
+                    ESPAÇO PARA ANÚNCIOS PRIVADOS<br>
+                    300x250px
+                </div>
+            </div>
+
+            <div class="archive-section">
+                <h3 class="section-title">Notícias Recentes</h3>
+                <ul class="archive-list" id="recent-technology-list"></ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fas fa-newspaper"></i>
+                <span>Notícias Diárias</span>
+            </div>
+            <p>Seu portal de informação confiável desde 2024</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p>&copy; 2024 Notícias Diárias. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script src="../../js/news-loader.js"></script>
+    <script>
+        // Script específico para a página de tecnologia
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filtrar notícias de tecnologia
+            const allNews = newsLoader.getNews();
+            const technologyNews = allNews.filter(news => news.category === "Tecnologia");
+            
+            // Renderizar notícias de tecnologia
+            renderTechnologyNews(technologyNews);
+            
+            // Carregar notícias recentes para exibir no sidebar
+            const recentNews = allNews.slice(0, 3);
+            renderRecentTechnologyNews(recentNews);
+        });
+        
+        // Função para renderizar notícias de tecnologia
+        function renderTechnologyNews(technologyNews) {
+            const technologyContainer = document.getElementById('technology-news-container');
+            
+            if (!technologyContainer) return;
+            
+            if (technologyNews.length === 0) {
+                technologyContainer.innerHTML = '<p>Nenhuma notícia de tecnologia encontrada.</p>';
+                return;
+            }
+            
+            technologyNews.forEach(news => {
+                const newsCard = document.createElement('article');
+                newsCard.className = 'news-card';
+                
+                newsCard.innerHTML = `
+                    <div class="news-image">${news.image}</div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span>${news.date}</span>
+                            <span>•</span>
+                            <span>${news.category}</span>
+                        </div>
+                        <h3 class="news-title">${news.title}</h3>
+                        <p class="news-excerpt">${news.excerpt}</p>
+                        <a href="#" class="read-more" data-id="${news.id}">Ler mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                `;
+                
+                // Adicionar evento de clique
+                newsCard.querySelector('.read-more').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Visualizando notícia de tecnologia. Em um sistema real, esta página mostraria o conteúdo completo da notícia.');
+                });
+                
+                technologyContainer.appendChild(newsCard);
+            });
+        }
+        
+        // Função para renderizar notícias recentes no sidebar
+        function renderRecentTechnologyNews(recentNews) {
+            const recentTechnologyList = document.getElementById('recent-technology-list');
+            
+            if (!recentTechnologyList) return;
+            
+            recentNews.forEach(news => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <a href="#" class="archive-link" data-id="${news.id}">
+                        <span class="archive-date">${news.date}</span>
+                        <span>${news.title}</span>
+                    </a>
+                `;
+                
+                // Adicionar evento de clique
+                listItem.querySelector('.archive-link').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Visualizando notícia recente. Em um sistema real, esta página carregaria o conteúdo completo da notícia.');
+                });
+                
+                recentTechnologyList.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>
